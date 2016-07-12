@@ -1,5 +1,7 @@
 var controller = (function() {
-
+	var nextLevel = function(){
+		alert('NextLevel');
+	};
 	return {
 		addControls: function() {
 			document.body.addEventListener('keydown', function(event) {
@@ -13,6 +15,8 @@ var controller = (function() {
 					model.move(0, 1);
 
 				view.draw();
+				if (model.checkState()) 
+					nextLevel();
 			});
 		},
 	}

@@ -19,6 +19,14 @@ var model = (function() {
     var level =[], map = [];
 
     return {
+        checkState: function(){
+            var map = this.getMap();
+            for (var i = 0; i < map.length; ++i)
+                for (var j = 0; j < map[0].length; ++j)
+                    if (map[i][j] == '@') return false;
+            return true;
+        },
+
         setLevelNumber: function(levelNumber) {
             level = levels.getLevel(levelNumber);
 
@@ -95,8 +103,11 @@ var model = (function() {
                 return movedElements;
 
             if (map[to.y][to.x] == '@') {
-                if (map[to.y + shiftY][to.x + shiftX] != '#' && map[to.y + shiftY][to.x + shiftX] != '@') {
-                    map[to.y + shiftY][to.x + shiftX] = map[to.y][to.x];
+                if (map[to.y + shiftY][to.x + shiftX] == '.' || map[to.y + shiftY][to.x + shiftX] == '?') {
+                    if (map[to.y + shiftY][to.x + shiftX] == '?')
+                        map[to.y + shiftY][to.x + shiftX] = '!';
+                    else
+                        map[to.y + shiftY][to.x + shiftX] = map[to.y][to.x];
                     movedElements[0] = this.movedRange(to.x, to.y, to.x + shiftX, to.y + shiftY);
                     map[to.y][to.x] = '*';
                     movedElements[1] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
