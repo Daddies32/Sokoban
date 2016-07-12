@@ -68,7 +68,7 @@ var model = (function() {
             var boxes = [];
             for (var i = 0; i < map.length; ++i) {
                 for (var j = 0; j < map[i].length; ++j) {
-                    if (map[i][j] == '@') {
+                    if (map[i][j] == '@' || map[i][j] == '!') {
                         boxes.push({x: j, y: i});
                     }
                 }
@@ -101,6 +101,11 @@ var model = (function() {
 
             if (map[to.y][to.x] == '#')
                 return movedElements;
+
+            if (map[to.y][to.x] == '!') {
+                if (map[to.y + shiftY][to.x + shiftX] == '.' || map[to.y + shiftY][to.x + shiftX] == '?')
+                    map[to.y][to.x] = '@';
+            };
 
             if (map[to.y][to.x] == '@') {
                 if (map[to.y + shiftY][to.x + shiftX] == '.' || map[to.y + shiftY][to.x + shiftX] == '?') {
