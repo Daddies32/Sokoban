@@ -1,11 +1,11 @@
 var levels = (function() {
 		const level_0 = {
         map: [
-        	'###',
-            '..#',
-            '..#',
-            '..#',
-            '###'
+        	'#####',
+            '#..?#',
+            '#...#',
+            '#..?#',
+            '#####'
         ],
         charCoords: {
             x: 1,
@@ -74,7 +74,11 @@ var levels = (function() {
 	return {
 		getLevel: function(levelNumber) {
 			return levels[levelNumber];
-		}
+		},
+
+        getNumLevels: function() {
+            return levels.length;
+        }
 	}
 
 })();

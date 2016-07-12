@@ -1,9 +1,9 @@
-function initGame(levelNumber) {
-	model.setLevelNumber(levelNumber);
+function initGame() {
+	controller.fillLevelSelector('selectLevel', 'startBtn');
 	controller.addControls();
-	view.draw();
+	controller.loadLevel(0);
 }
 
 window.onload = function() {
-	initGame(3);
+	initGame();
 };

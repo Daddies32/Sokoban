@@ -2,6 +2,7 @@ var controller = (function() {
 	var nextLevel = function(){
 		alert('NextLevel');
 	};
+
 	return {
 		addControls: function() {
 			document.body.addEventListener('keydown', function(event) {
@@ -17,6 +18,29 @@ var controller = (function() {
 				view.draw();
 				if (model.checkState()) 
 					nextLevel();
+			});
+		},
+
+		loadLevel: function(level) {
+			model.setLevelNumber(level);
+			view.draw();
+		},
+
+		fillLevelSelector: function(selectId, startBtn) {
+			var select = document.getElementById(selectId);
+
+			for (var i = 0; i < levels.getNumLevels(); ++i) {
+				var opt = document.createElement('option');
+				opt.appendChild(document.createTextNode(i + 1));
+				opt.setAttribute('value', i);
+
+				select.appendChild(opt);
+			}
+
+			var btn = document.getElementById(startBtn);
+
+			btn.addEventListener('click', function(event) {
+				controller.loadLevel(select.options[select.selectedIndex].value);
 			});
 		},
 	}

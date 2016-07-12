@@ -34,6 +34,10 @@ html, body {
 	width: 100px;
 }
 
+#startBtn {
+	width: 80px;
+}
+
 .center {
 	left: 300px;
 	right: 300px;
