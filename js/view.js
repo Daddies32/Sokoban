@@ -21,6 +21,9 @@ var view = (function() {
 	const imgBox = new Image();
 	imgBox.src = 'img/box.png';
 
+	const imgActiveBox = new Image();
+	imgActiveBox.src = 'img/active_box.png';
+
 	const imgStore = new Image();
 	imgStore.src = 'img/store.png';
 
@@ -48,6 +51,7 @@ var view = (function() {
 
 		draw: function(objects) {
 			var level = model.getLevel();
+
 			var canvas = document.getElementById('level');
 			canvas.height = level.map.length * spriteSize;
 			canvas.width = level.map[0].length * spriteSize;
@@ -56,6 +60,8 @@ var view = (function() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			this.drawLevel(ctx, level.map);
 
+			var map = model.getMap();
+
 			if (objects === undefined) {
 				var character = model.getCharacterCoords();
 				var boxes = model.getBoxesCoords();
@@ -63,7 +69,10 @@ var view = (function() {
 				ctx.drawImage(imgCharacter, character.x * spriteSize, character.y * spriteSize, spriteSize, spriteSize);
 
 				for (var i = 0; i < boxes.length; ++i) {
-					ctx.drawImage(imgBox, boxes[i].x * spriteSize, boxes[i].y * spriteSize, spriteSize, spriteSize);
+					if (map[boxes[i].y][boxes[i].x] == '@')
+						ctx.drawImage(imgBox, boxes[i].x * spriteSize, boxes[i].y * spriteSize, spriteSize, spriteSize);
+					else
+						ctx.drawImage(imgActiveBox, boxes[i].x * spriteSize, boxes[i].y * spriteSize, spriteSize, spriteSize);		
 				}
 			}
 		}
