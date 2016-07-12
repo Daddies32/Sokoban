@@ -1,6 +1,6 @@
 var controller = (function() {
 	var nextLevel = function(){
-		alert('NextLevel');
+		controller.loadLevel(model.getLevelNumber() + 1);
 	};
 
 	return {

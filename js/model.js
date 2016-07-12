@@ -17,6 +17,7 @@
 
 var model = (function() {
     var level =[], map = [];
+    var levelNum;
 
     return {
         checkState: function(){
@@ -28,6 +29,7 @@ var model = (function() {
         },
 
         setLevelNumber: function(levelNumber) {
+            levelNum = levelNumber;
             level = levels.getLevel(levelNumber);
 
             for (var i = 0; i < level.map.length; ++i) {
@@ -41,6 +43,10 @@ var model = (function() {
             for (var i = 0; i < level.boxes.length; ++i) {
                 map[level.boxes[i].y][level.boxes[i].x] = '@';
             }
+        },
+
+        getLevelNumber: function() {
+            return levelNum;
         },
 
         getMap: function() {
