@@ -1,0 +1,22 @@
+@font-face {
+    font-family: lasco;
+    src: url(../fonts/lasco.ttf);
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+#title {
+	display: block;
+	text-align: center;
+	font-family: lasco;
+	color: #5A5A5A;
+}
+
+#level {
+	display: block;
+	margin: 0 auto;
+}
