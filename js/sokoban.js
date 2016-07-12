@@ -5,5 +5,5 @@ function initGame(levelNumber) {
 }
 
 window.onload = function() {
-	initGame(2);
+	initGame(3);
 };

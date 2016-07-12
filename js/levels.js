@@ -50,7 +50,26 @@ var levels = (function() {
         boxes: [{x: 2, y: 2}]
     };
 
-	var levels = [level_0, level_1, level_2];
+    const level_3 = {
+        map: [
+            '  ##### ',
+            '###...# ',
+            '#...#.##',
+            '#.#..?.#',
+            '#....#.#',
+            '##.#...#',
+            ' #...###',
+            ' #####  '
+        ],
+        charCoords: {
+            x: 2,
+            y: 6
+        },
+        boxes: [{x: 2, y: 2},
+                {x: 2, y: 5}]
+    };
+
+	var levels = [level_0, level_1, level_2, level_3];
 
 	return {
 		getLevel: function(levelNumber) {
