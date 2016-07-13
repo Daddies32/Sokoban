@@ -9,7 +9,7 @@
 
 var model = (function() {
     var level =[], map = [];
-    var levelNumber;
+    var levelNumber, stepsCount;
 
     return {
         isVictory: function(){
@@ -22,6 +22,7 @@ var model = (function() {
 
         setLevel: function(levelNum) {
             levelNumber = levelNum;
+            stepsCount = 0;
             level = levels.getLevel(levelNumber);
 
             for (var i = 0; i < level.map.length; ++i) {
@@ -35,6 +36,14 @@ var model = (function() {
             for (var i = 0; i < level.boxes.length; ++i) {
                 map[level.boxes[i].y][level.boxes[i].x] = '@';
             }
+        },
+
+        incStepCount: function() {
+            stepsCount++;
+        },
+
+        getStepsCount: function() {
+            return stepsCount;
         },
 
         getLevelNumber: function() {

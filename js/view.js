@@ -37,6 +37,7 @@ var view = (function() {
 	imgStore.src = 'img/store.png';
 
 	var imgCharacter = imgCharFront;
+	var timerId;
 
 	var drawBoxes = function(ctx, map, boxes) {
 		for (var i = 0; i < boxes.length; ++i) {
@@ -94,11 +95,13 @@ var view = (function() {
 				}
 			}
 
-			dx += 2 * (objects[0].finishPos.x - objects[0].startPos.x);
-			dy += 2 * (objects[0].finishPos.y - objects[0].startPos.y);
+			dx += 5 * (objects[0].finishPos.x - objects[0].startPos.x);
+			dy += 5 * (objects[0].finishPos.y - objects[0].startPos.y);
 
-			if (Math.abs(dx) != spriteSize + 1 && Math.abs(dy) != spriteSize + 1)
-				requestAnimationFrame(animate);
+			if (Math.abs(dx) < spriteSize + 1 && Math.abs(dy) < spriteSize + 1)
+				timerId = window.setTimeout(function() {
+					requestAnimationFrame(animate)
+				}, 30);
 			else
 				view.draw();
 		});
@@ -164,8 +167,13 @@ var view = (function() {
 				var dx = objects[0].finishPos.x - objects[0].startPos.x;
 				var dy = objects[0].finishPos.y - objects[0].startPos.y;
 				
+				clearTimeout(timerId);
 				animate(canvas, canvas.width, canvas.height, ctx, level.map, map, objects, dx, dy, boxToDraw);	
 			}
+		},
+
+		updateStepsCount: function() {
+			document.getElementById('stepsCount').innerHTML = model.getStepsCount();
 		}
 	} 
 

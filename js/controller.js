@@ -5,7 +5,7 @@ var controller = (function() {
 
 	return {
 		addControls: function() {
-			document.body.addEventListener('keyup', function(event) {
+			document.body.addEventListener('keydown', function(event) {
 				var objectsToMove = undefined;
 
 				if (event.keyCode == 37)
@@ -17,6 +17,11 @@ var controller = (function() {
 				else if (event.keyCode == 40)
 					objectsToMove = model.move(0, 1);
 
+				if (objectsToMove != undefined)
+					model.incStepCount();
+
+				view.updateStepsCount();
+
 				view.draw(objectsToMove);
 
 				if (model.isVictory())
@@ -27,6 +32,7 @@ var controller = (function() {
 		loadLevel: function(level) {
 			model.setLevel(level);
 			document.getElementById('selectLevel').selectedIndex = level;
+			view.updateStepsCount();
 			view.draw();
 		},
 
