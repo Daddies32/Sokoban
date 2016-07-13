@@ -98,7 +98,7 @@ var view = (function() {
 
 			var canvas = document.getElementById('level');
 			canvas.height = level.map.length * spriteSize;
-			canvas.width = level.map[0].length * spriteSize;
+			canvas.width = 760;
 			var ctx = canvas.getContext('2d');
 
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -109,7 +109,6 @@ var view = (function() {
 
 			if (objects === undefined || objects.length == 0) {
 				var character = model.getCharacterCoords();
-
 				ctx.drawImage(imgCharacter, character.x * spriteSize, character.y * spriteSize, spriteSize, spriteSize);
 				drawBoxes(ctx, map, boxes);
 			}

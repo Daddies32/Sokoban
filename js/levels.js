@@ -1,7 +1,7 @@
 var levels = (function() {
 		const level_0 = {
         map: [
-        	'#####',
+        	'##### ',
             '#..?#',
             '#...#',
             '#..?#',
