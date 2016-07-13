@@ -5,7 +5,7 @@ var controller = (function() {
 
 	return {
 		addControls: function() {
-			document.body.addEventListener('keydown', function(event) {
+			document.body.addEventListener('keyup', function(event) {
 				var objectsToMove = undefined;
 
 				if (event.keyCode == 37)
