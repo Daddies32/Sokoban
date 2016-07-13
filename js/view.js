@@ -9,8 +9,17 @@
 var view = (function() {
 	const spriteSize = 32;
 
-	const imgCharacter = new Image();
-	imgCharacter.src = 'img/character.png';
+	const imgCharFront = new Image();
+	imgCharFront.src = 'img/character_f.png';
+
+	const imgCharBack = new Image();
+	imgCharBack.src = 'img/character_b.png';
+
+	const imgCharLeft = new Image();
+	imgCharLeft.src = 'img/character_l.png';
+
+	const imgCharRight = new Image();
+	imgCharRight.src = 'img/character_r.png';
 
 	const imgBackground = new Image();
 	imgBackground.src = 'img/background.png';
@@ -26,6 +35,8 @@ var view = (function() {
 
 	const imgStore = new Image();
 	imgStore.src = 'img/store.png';
+
+	var imgCharacter = imgCharFront;
 
 	var drawBoxes = function(ctx, map, boxes) {
 		for (var i = 0; i < boxes.length; ++i) {
@@ -45,6 +56,8 @@ var view = (function() {
 				localMap[i] += map[i][j];
 		}
 
+		var frame = -1;
+
 		requestAnimationFrame(function animate(time) {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			view.drawLevel(ctx, level);
@@ -52,7 +65,27 @@ var view = (function() {
 
 			for (var i = 0; i < objects.length; ++i) {
 				if (localMap[objects[i].finishPos.y][objects[i].finishPos.x] == '*') {
-					ctx.drawImage(imgCharacter, objects[i].startPos.x * spriteSize + dx,
+					if (dx > 0) {
+						imgCharacter = imgCharRight;
+					}
+					else if (dx < 0) {
+						imgCharacter = imgCharLeft;
+					}
+					else if (dy > 0) {
+						imgCharacter = imgCharFront;
+					}
+					else if (dy < 0) {
+						imgCharacter = imgCharBack;
+					}
+
+					frame++;
+					if (dx != 0 && frame > 1)
+						frame = 0;
+					else if (dy != 0 && frame > 2)
+						frame = 0;
+
+					ctx.drawImage(imgCharacter, frame * spriteSize, 0, spriteSize, spriteSize,
+						objects[i].startPos.x * spriteSize + dx,
 						objects[i].startPos.y * spriteSize + dy, spriteSize, spriteSize);
 				}
 				else {
@@ -61,8 +94,8 @@ var view = (function() {
 				}
 			}
 
-			dx += objects[0].finishPos.x - objects[0].startPos.x;
-			dy += objects[0].finishPos.y - objects[0].startPos.y;
+			dx += 2 * (objects[0].finishPos.x - objects[0].startPos.x);
+			dy += 2 * (objects[0].finishPos.y - objects[0].startPos.y);
 
 			if (Math.abs(dx) != spriteSize + 1 && Math.abs(dy) != spriteSize + 1)
 				requestAnimationFrame(animate);
@@ -109,7 +142,8 @@ var view = (function() {
 
 			if (objects === undefined || objects.length == 0) {
 				var character = model.getCharacterCoords();
-				ctx.drawImage(imgCharacter, character.x * spriteSize, character.y * spriteSize, spriteSize, spriteSize);
+				ctx.drawImage(imgCharacter, 0, 0, spriteSize, spriteSize,
+					character.x * spriteSize, character.y * spriteSize, spriteSize, spriteSize);
 				drawBoxes(ctx, map, boxes);
 			}
 			else {
