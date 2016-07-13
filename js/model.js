@@ -73,11 +73,11 @@ var model = (function() {
 
         movedRange: function(xStart, yStart, xFinish, yFinish) {
             return {
-                startPosition: {
+                startPos: {
                     x: xStart,
                     y: yStart
                 },
-                finishPosition: {
+                finishPos: {
                     x: xFinish,
                     y: yFinish
                 }
@@ -93,7 +93,7 @@ var model = (function() {
                 y: charCoords.y + shiftY
             }
 
-            if (map[to.y][to.x] == '#')
+            if (map[to.y][to.x] == '#') 
                 return movedElements;
 
             if (map[to.y][to.x] == '!')
