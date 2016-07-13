@@ -17,7 +17,7 @@ var controller = (function() {
 				else if (event.keyCode == 40)
 					objectsToMove = model.move(0, 1);
 
-				if (objectsToMove != undefined)
+				if (objectsToMove != undefined && objectsToMove.length > 0)
 					model.incStepCount();
 
 				view.updateStepsCount();
