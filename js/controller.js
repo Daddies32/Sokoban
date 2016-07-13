@@ -16,13 +16,14 @@ var controller = (function() {
 					model.move(0, 1);
 
 				view.draw();
-				if (model.checkState()) 
+				
+				if (model.isVictory()) 
 					nextLevel();
 			});
 		},
 
 		loadLevel: function(level) {
-			model.setLevelNumber(level);
+			model.setLevel(level);
 			view.draw();
 		},
 

@@ -4,23 +4,15 @@
  # - wall
  @ - box
  ? - store
- */
-
-/*
- 1 level
- #####
- #*@?#
- #...#
- #.@?#
- #####
+ ! - box on store
  */
 
 var model = (function() {
     var level =[], map = [];
-    var levelNum;
+    var levelNumber;
 
     return {
-        checkState: function(){
+        isVictory: function(){
             var map = this.getMap();
             for (var i = 0; i < map.length; ++i)
                 for (var j = 0; j < map[0].length; ++j)
@@ -28,8 +20,8 @@ var model = (function() {
             return true;
         },
 
-        setLevelNumber: function(levelNumber) {
-            levelNum = levelNumber;
+        setLevel: function(levelNum) {
+            levelNumber = levelNum;
             level = levels.getLevel(levelNumber);
 
             for (var i = 0; i < level.map.length; ++i) {
@@ -46,7 +38,7 @@ var model = (function() {
         },
 
         getLevelNumber: function() {
-            return levelNum;
+            return levelNumber;
         },
 
         getMap: function() {
@@ -60,12 +52,8 @@ var model = (function() {
         getCharacterCoords: function() {
             for (var i = 0; i < map.length; ++i) {
                 for (var j = 0; j < map[i].length; ++j) {
-                    if (map[i][j] == '*') {
-                        return {
-                            x: j,
-                            y: i
-                        }
-                    }
+                    if (map[i][j] == '*')
+                        return { x: j, y: i }
                 }
             }
         },
@@ -108,9 +96,8 @@ var model = (function() {
             if (map[to.y][to.x] == '#')
                 return movedElements;
 
-            if (map[to.y][to.x] == '!') {
+            if (map[to.y][to.x] == '!')
                 map[to.y][to.x] = '@';
-            };
 
             if (map[to.y][to.x] == '@') {
                 if (map[to.y + shiftY][to.x + shiftX] == '.' || map[to.y + shiftY][to.x + shiftX] == '?') {
@@ -118,13 +105,17 @@ var model = (function() {
                         map[to.y + shiftY][to.x + shiftX] = '!';
                     else
                         map[to.y + shiftY][to.x + shiftX] = map[to.y][to.x];
+
                     movedElements[0] = this.movedRange(to.x, to.y, to.x + shiftX, to.y + shiftY);
                     map[to.y][to.x] = '*';
+
                     movedElements[1] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
                     map[charCoords.y][charCoords.x] = level.map[charCoords.y][charCoords.x];
                 }
+
                 if (map[to.y][to.x] == '@' && level.map[to.y][to.x] == '?')
                     map[to.y][to.x] = '!';
+
                 return movedElements;
             }
 
