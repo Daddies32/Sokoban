@@ -109,8 +109,7 @@ var model = (function() {
                 return movedElements;
 
             if (map[to.y][to.x] == '!') {
-                if (map[to.y + shiftY][to.x + shiftX] == '.' || map[to.y + shiftY][to.x + shiftX] == '?')
-                    map[to.y][to.x] = '@';
+                map[to.y][to.x] = '@';
             };
 
             if (map[to.y][to.x] == '@') {
@@ -124,7 +123,8 @@ var model = (function() {
                     movedElements[1] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
                     map[charCoords.y][charCoords.x] = level.map[charCoords.y][charCoords.x];
                 }
-
+                if (map[to.y][to.x] == '@' && level.map[to.y][to.x] == '?')
+                    map[to.y][to.x] = '!';
                 return movedElements;
             }
 
