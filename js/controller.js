@@ -26,6 +26,7 @@ var controller = (function() {
 
 		loadLevel: function(level) {
 			model.setLevel(level);
+			document.getElementById('selectLevel').selectedIndex = level;
 			view.draw();
 		},
 
@@ -41,10 +42,9 @@ var controller = (function() {
 			}
 
 			var btn = document.getElementById(startBtn);
-
-			btn.addEventListener('click', function(event) {
+			btn.onclick = function() {
 				controller.loadLevel(select.options[select.selectedIndex].value);
-			});
+			};
 		},
 	}
 

@@ -1,5 +1,5 @@
 var levels = (function() {
-		const level_0 = {
+	const level_0 = {
         map: [
         	'##### ',
             '#..?#',
@@ -95,10 +95,8 @@ var levels = (function() {
                 {x: 12, y: 6}, {x: 13, y: 6}, {x: 14, y: 6},
                 {x: 15, y: 6}, {x: 19, y: 8}]
     };
+
 	var levels = [level_0, level_1, level_2, level_3, level_4];
-    var LevelsByDifficulty = [[level_0, level_1], 
-                              [level_2, level_3], 
-                              [level_4]];
 	return {
 		getLevel: function(levelNumber) {
 			return levels[levelNumber];
