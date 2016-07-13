@@ -173,7 +173,20 @@ var view = (function() {
 		},
 
 		updateStepsCount: function() {
-			document.getElementById('stepsCount').innerHTML = model.getStepsCount();
+			var level = +model.getLevelNumber() + 1;
+			var str = document.getElementById('stepsCount' + level);
+
+			if (str == undefined) {
+				str = document.createElement('label');
+				str.id = 'stepsCount' + level;
+				str.innerHTML = '#' + level + ' Количество ходов: ' + model.getStepsCount();
+
+				document.getElementById('scoreboard').appendChild(str);
+				document.getElementById('scoreboard').appendChild(document.createElement('br'));
+			}
+			else {
+				str.innerHTML = '#' + level + ' Количество ходов: ' + model.getStepsCount();
+			}
 		}
 	} 
 
