@@ -70,12 +70,14 @@ var controller = (function() {
 			};
 		},
 
-		setGenButton: function(id) {
-			var btn = document.getElementById(id);
+		setGeneratorOptions: function(selectId, buttonId) {
+			var select = document.getElementById(selectId);
+
+			var btn = document.getElementById(buttonId);
 
 			btn.onclick = function() {
-				controller.loadGenLevel(19);	
-			};	
+				controller.loadGenLevel(select.options[select.selectedIndex].value);	
+			};
 		}
 	}
 
