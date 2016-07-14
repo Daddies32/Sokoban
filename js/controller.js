@@ -3,6 +3,15 @@ var controller = (function() {
 		controller.loadLevel(+model.getLevelNumber() + 1);
 	};
 
+	var writeScore = function() {
+		var levelNum = model.getLevelNumber();
+
+		if (levelNum !== 'Gen')
+			levelNum++;
+		
+		scoreboard.addToScoreBoard(levelNum, model.getStepsCount());
+	}
+
 	return {
 		addControls: function() {
 			var press = false;
@@ -31,8 +40,10 @@ var controller = (function() {
 
 				view.draw(objectsToMove);
 
-				if (model.isVictory())
+				if (model.isVictory()) {
+					writeScore();
 					nextLevel();
+				}
 			});
 
 			document.body.addEventListener('keyup', function(event) {

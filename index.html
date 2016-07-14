@@ -4,12 +4,23 @@
 	<meta charset="utf-8">
 	<title>Sokoban</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+	<script type="text/javascript">
+		var config = {
+			apiKey: "AIzaSyB94OhZhhVtOkdo9JoKQVCboHgnRQbe1bY",
+			authDomain: "sokoban-ea225.firebaseapp.com",
+			databaseURL: "https://sokoban-ea225.firebaseio.com",
+			storageBucket: "",
+		};
+		firebase.initializeApp(config);
+	</script>
 	<script type="text/javascript" src = "js/levels.js"></script>
 	<script type="text/javascript" src = "js/model.js"></script>
 	<script type="text/javascript" src = "js/view.js"></script>
 	<script type="text/javascript" src = "js/controller.js"></script>
-	<script type="text/javascript" src = "js/sokoban.js"></script>
 	<script type="text/javascript" src = "js/generator.js"></script>
+	<script type="text/javascript" src = "js/scoreboard.js"></script>
+	<script type="text/javascript" src = "js/sokoban.js"></script>
 </head>
 <body>
 <h1 id = "title">Sokoban</h1>
