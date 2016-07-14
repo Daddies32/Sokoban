@@ -175,7 +175,7 @@ var view = (function() {
 		updateStepsCount: function() {
 			var level = model.getLevelNumber();
 
-			if (typeof(level) == 'Number')
+			if (level !== 'Gen')
 				level = +level + 1;
 			
 			var str = document.getElementById('stepsCount' + level);

@@ -78,6 +78,16 @@ var controller = (function() {
 			btn.onclick = function() {
 				controller.loadGenLevel(select.options[select.selectedIndex].value);	
 			};
+		},
+
+		setRestartBtn: function(id) {
+			var btn = document.getElementById(id);
+
+			btn.onclick = function() {
+				model.setMap(model.getLevel());
+				view.updateStepsCount();
+				view.draw();
+			};
 		}
 	}
 
