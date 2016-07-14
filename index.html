@@ -12,7 +12,9 @@
 			databaseURL: "https://sokoban-ea225.firebaseio.com",
 			storageBucket: "",
 		};
-		firebase.initializeApp(config);
+
+		if (typeof firebase !== 'undefined')
+			firebase.initializeApp(config);
 	</script>
 	<script type="text/javascript" src = "js/levels.js"></script>
 	<script type="text/javascript" src = "js/model.js"></script>
@@ -26,6 +28,7 @@
 <h1 id = "title">Sokoban</h1>
 <div id = "game">
 	<div class = "left boxshadow">
+		Ник:<br> <input type="text" name="nickname" id = "nickname"><br>
 		Выберите уровень:<br> 
 		<select id = "selectLevel"></select><br>
 		<a href = "#" id = "startBtn" class = "button">Начать</a>
@@ -47,7 +50,8 @@
 	</div>
 
 	<div id = "scoreboard" class = "right boxshadow">
-		
+		Таблица результатов<hr>
+		<table id = "scoreboard_table"></table>
 	</div>
 </div>
 </body>

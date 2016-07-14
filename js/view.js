@@ -191,6 +191,52 @@ var view = (function() {
 			else {
 				str.innerHTML = '#' + level + ' Количество ходов: ' + model.getStepsCount();
 			}
+		},
+
+		updateScoreBoard: function() {
+			var table = document.getElementById('scoreboard_table');
+
+			while(table.childNodes.length != 0) {
+				table.removeChild(table.lastChild);
+			}
+
+			var title = document.createElement('tr');
+
+			var thUser = document.createElement('th');
+			thUser.innerHTML = 'Ник';
+			title.appendChild(thUser);
+
+			var thLvl = document.createElement('th');
+			thLvl.innerHTML = 'Уровень';
+			title.appendChild(thLvl);
+
+			var thSteps = document.createElement('th');
+			thSteps.innerHTML = 'Шагов';
+			title.appendChild(thSteps);
+
+			table.appendChild(title);
+
+			scoreboard.getScoreBoard(function(board) {
+				for (var i = 0; i < board.length; ++i) {
+					for (var j = 0; j < board[i].scores.length; ++j) {
+						var tr = document.createElement('tr');
+
+						var user = document.createElement('td');
+						user.innerHTML = board[i].name;
+						tr.appendChild(user);
+
+						var lvl = document.createElement('td');
+						lvl.innerHTML = board[i].scores[j].level;
+						tr.appendChild(lvl);
+
+						var steps = document.createElement('td');
+						steps.innerHTML = board[i].scores[j].steps;
+						tr.appendChild(steps);
+
+						table.appendChild(tr);
+					}
+				}
+			});
 		}
 	} 
 

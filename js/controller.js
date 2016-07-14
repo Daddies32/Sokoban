@@ -1,5 +1,8 @@
 var controller = (function() {
+
 	var nextLevel = function(){
+		if (!scoreboard.checkOnline())
+				view.updateScoreBoard();
 		controller.loadLevel(+model.getLevelNumber() + 1);
 	};
 
@@ -8,8 +11,12 @@ var controller = (function() {
 
 		if (levelNum !== 'Gen')
 			levelNum++;
-		
-		scoreboard.addToScoreBoard(levelNum, model.getStepsCount());
+
+		var nick = document.getElementById('nickname').value;
+		if (nick.split(' ').length == +nick.length + 1)
+			nick = 'guest';
+
+		scoreboard.addToScoreBoard(nick, levelNum, model.getStepsCount());
 	}
 
 	return {
@@ -36,8 +43,6 @@ var controller = (function() {
 				if (objectsToMove != undefined && objectsToMove.length > 0) 
 					model.incStepCount();
 
-				view.updateStepsCount();
-
 				view.draw(objectsToMove);
 
 				if (model.isVictory()) {
@@ -54,13 +59,15 @@ var controller = (function() {
 		loadLevel: function(level) {
 			model.setLevel(level);
 			document.getElementById('selectLevel').selectedIndex = level;
-			view.updateStepsCount();
+			if (scoreboard.checkOnline())
+				view.updateScoreBoard();
 			view.draw();
 		},
 
 		loadGenLevel: function(size) {
 			model.setGenLevel(size);
-			view.updateStepsCount();
+			if (scoreboard.checkOnline())
+				view.updateScoreBoard();
 			view.draw();
 		},
 
@@ -96,7 +103,6 @@ var controller = (function() {
 
 			btn.onclick = function() {
 				model.setMap(model.getLevel());
-				view.updateStepsCount();
 				view.draw();
 			};
 		}

@@ -61,6 +61,21 @@ hr {
 	border-radius: 0 8px 8px 0;
 }
 
+#nickname {
+  padding: 2px;
+  border: 2px solid rgba(255, 255, 255, .5);
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, .25) inset,
+    0 2px 5px rgba(0, 0, 0, .25);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .5);
+  appearance: none;
+  outline: none;
+  font-family: lasco;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
 .boxshadow {
     position:relative;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -155,4 +170,24 @@ a.button:active {
 	right: 0px;
 	background: #fff;
 	border-radius: 8px 0 0 8px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 15px;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+td {
+  border-right: 1px solid #000;
+}
+
+th:last-child, td:last-child {
+  border-right: 0;
 }
