@@ -3,23 +3,29 @@ var generator =  (function(){
     var map = [];
     var field = [];
     var boxes = [];
+    var fieldForBfs = [];
     var charCoords;
+    var boxCount;
+    var size;
 
     String.prototype.splice = function(start, count, str){
         return this.substring(0, start) + str + this.substring(start + count);
     };
 
+    function clearWall(v1, v2) {
+        var i = 1 + 3 * Math.max(v1.x, v2.x) - Math.abs((v1.x - v2.x));
+        var j = 1 + 3 * Math.max(v1.y, v2.y) - Math.abs((v1.y - v2.y));
+        map[i] = map[i].splice(j, 1, '.');
+        i += Math.abs((v1.y - v2.y));
+        j += Math.abs((v1.x - v2.x));
+        map[i] = map[i].splice(j, 1, '.');
+    };
+    
     function rndBfs(v, p){
         used[v.x][v.y] = true;
 
-        if (p != undefined) {
-            var i = 1 + 3 * Math.max(v.x, p.x) - Math.abs((v.x - p.x));
-            var j = 1 + 3 * Math.max(v.y, p.y) - Math.abs((v.y - p.y));
-            map[i] = map[i].splice(j, 1, '.');
-            i += Math.abs((v.y - p.y));
-            j += Math.abs((v.x - p.x));
-            map[i] = map[i].splice(j, 1, '.');
-        }
+        if (p != undefined)
+            clearWall(v, p);
         var shift = [
             {x: -1, y: 0},
             {x: 1, y: 0},
@@ -33,13 +39,27 @@ var generator =  (function(){
             shift[ind1] = shift[ind2];
             shift[ind2] = c;
         }
-
+        var k = 0;
         for (var i = 0; i < 4; ++i) {
             var to = {x: v.x + shift[i].x,
                       y: v.y + shift[i].y};
-            if (!used[to.x][to.y])
+            if (!used[to.x][to.y]) {
+                ++k;
                 rndBfs(to, v);
+            }
         }
+        if (k == 0){
+            k = 0;
+            for (var i = 0; i < 4; ++i) {
+                var to = {x: v.x + shift[i].x,
+                          y: v.y + shift[i].y};
+                if (to.x >= 0 && to.y >= 0 && to.x < used.length - 1 && to.y < used.length - 1){
+                    k++
+                    clearWall(v, to);
+                }
+                if (k == 1) break;
+            }
+		}
     };
 
     function initArrUsed(size) {
@@ -59,6 +79,20 @@ var generator =  (function(){
     }
 
     return {
+        copyField: function() {
+            newField = [];
+            for (var i = 0; i < field.length; ++i)
+                newField[i] = field[i];
+            return newField;
+        },
+
+        isEmptyCell: function(x, y) {
+            if (field[y][x] == '.' || field[y][x] == '?')
+                return true;
+            else
+                return false;
+        },
+
         getCharacterCoords: function() {
             for (var i = 0; i < field.length; ++i) {
                 for (var j = 0; j < field[i].length; ++j) {
@@ -81,7 +115,7 @@ var generator =  (function(){
             return boxes;
         },
 
-        move: function(shift, size) {
+        move: function(shift) {
             var x = charCoords.x + shift.x;
             var y = charCoords.y + shift.y;
             if (field[y][x] == '.' || field[y][x] == '?') {
@@ -104,7 +138,8 @@ var generator =  (function(){
             }
         },
 
-        generateLevel: function(size) {
+        generateLevel: function(ASize) {
+            size = ASize;
             map = [];
             for (var i = 0; i < size; ++i) {
                 map[i] = '';
@@ -125,7 +160,7 @@ var generator =  (function(){
                 field[i] = map[i];
 
             var stores = [];
-            var boxCount = 15;
+            boxCount = Math.ceil(size / 4) ;
             var k = 0;
             while (k < boxCount) {
                 var x = (Math.random()*100 >> 0) % size; if (x == 1) ++x;
@@ -147,16 +182,16 @@ var generator =  (function(){
 
             field[1] = field[1].splice(1, 1, '*');
             charCoords = this.getCharacterCoords();
-
-            for (var k = 0; k < 5 * Math.pow(10, 5); ++k) {
-                var shift = [
-                    {x: -1, y: 0},
-                    {x: 1, y: 0},
-                    {x: 0, y: 1},
-                    {x: 0, y: -1}
-                ];
-                rndInd = (Math.random()*100 >> 0) % 4;
-                generator.move(shift[rndInd], size);
+            var shift = [
+                {x: -1, y: 0},
+                {x: 0, y: -1},
+                {x: 1, y: 0},
+                {x: 0, y: 1}
+            ];
+            var steps = Math.pow(10, 5);
+            for (var k = 0; k < steps; ++k) {
+                rndInd = (Math.random()*100 >> 0) % (shift.length);
+                this.move(shift[rndInd], size);
             };
 
             return {
