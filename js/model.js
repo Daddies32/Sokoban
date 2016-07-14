@@ -15,6 +15,13 @@ var model = (function() {
     var level =[], map = [];
     var levelNumber, stepsCount;
 
+    var updateLevelInfo = function(levelNum, lvl) {
+        levelNumber = levelNum;
+        stepsCount = 0; 
+        level = lvl; 
+        model.setMap(level);
+    }
+
     return {
         isVictory: function() {
             var map = this.getMap();
@@ -44,18 +51,11 @@ var model = (function() {
         },
 
         setGenLevel: function(size) {
-            levelNumber = 'Gen';
-            level = generator.generateLevel(size);
-
-            this.setMap(level);
+            updateLevelInfo('Gen', generator.generateLevel(size));
         },
 
         setLevel: function(levelNum) {
-            levelNumber = levelNum;
-            stepsCount = 0;
-            level = levels.getLevel(levelNumber);
-
-            this.setMap(level);
+            updateLevelInfo(levelNum, levels.getLevel(levelNum));
         },
 
         incStepCount: function() {
