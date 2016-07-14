@@ -5,8 +5,13 @@ var controller = (function() {
 
 	return {
 		addControls: function() {
+			var press = false;
+
 			document.body.addEventListener('keydown', function(event) {
 				var objectsToMove = undefined;
+
+				if (press)
+					return;
 
 				if (event.keyCode == 37)
 					objectsToMove = model.move(-1, 0);
@@ -17,7 +22,9 @@ var controller = (function() {
 				else if (event.keyCode == 40)
 					objectsToMove = model.move(0, 1);
 
-				if (objectsToMove != undefined && objectsToMove.length > 0)
+				press = true;
+
+				if (objectsToMove != undefined && objectsToMove.length > 0) 
 					model.incStepCount();
 
 				view.updateStepsCount();
@@ -26,6 +33,10 @@ var controller = (function() {
 
 				if (model.isVictory())
 					nextLevel();
+			});
+
+			document.body.addEventListener('keyup', function(event) {
+				press = false;
 			});
 		},
 

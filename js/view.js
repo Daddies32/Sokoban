@@ -101,7 +101,7 @@ var view = (function() {
 			if (Math.abs(dx) < spriteSize + 1 && Math.abs(dy) < spriteSize + 1)
 				timerId = window.setTimeout(function() {
 					requestAnimationFrame(animate)
-				}, 30);
+				}, 20);
 			else
 				view.draw();
 		});
