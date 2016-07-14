@@ -173,7 +173,11 @@ var view = (function() {
 		},
 
 		updateStepsCount: function() {
-			var level = +model.getLevelNumber() + 1;
+			var level = model.getLevelNumber();
+
+			if (typeof(level) == 'Number')
+				level = +level + 1;
+			
 			var str = document.getElementById('stepsCount' + level);
 
 			if (str == undefined) {

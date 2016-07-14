@@ -76,6 +76,11 @@ a.button:active {
 	margin-top: 10px;
 }
 
+#genLevel {
+	margin-top: 10px;
+	font-size: 15px;
+}
+
 .center {
 	left: 300px;
 	right: 300px;

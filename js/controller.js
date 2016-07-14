@@ -36,6 +36,12 @@ var controller = (function() {
 			view.draw();
 		},
 
+		loadGenLevel: function(size) {
+			model.setGenLevel(size);
+			view.updateStepsCount();
+			view.draw();
+		},
+
 		fillLevelSelector: function(selectId, startBtn) {
 			var select = document.getElementById(selectId);
 
@@ -52,6 +58,14 @@ var controller = (function() {
 				controller.loadLevel(select.options[select.selectedIndex].value);
 			};
 		},
+
+		setGenButton: function(id) {
+			var btn = document.getElementById(id);
+
+			btn.onclick = function() {
+				controller.loadGenLevel(19);	
+			};	
+		}
 	}
 
 })();
