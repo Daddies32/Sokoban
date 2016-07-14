@@ -26,11 +26,7 @@ var model = (function() {
             return true;
         },
 
-        setLevel: function(levelNum) {
-            levelNumber = levelNum;
-            stepsCount = 0;
-            level = levels.getLevel(levelNumber);
-
+        setMap: function(level){
             map = [];
             for (var i = 0; i < level.map.length; ++i) {
                 map[i] = '';
@@ -42,7 +38,24 @@ var model = (function() {
 
             for (var i = 0; i < level.boxes.length; ++i) {
                 map[level.boxes[i].y] = map[level.boxes[i].y].replaceAt(level.boxes[i].x, '@');
+                if (level.map[level.boxes[i].y][level.boxes[i].x] == '?')
+                    map[level.boxes[i].y] = map[level.boxes[i].y].replaceAt(level.boxes[i].x, '!');
             }
+        },
+
+        setGenLevel: function(size) {
+            levelNumber = 'Gen';
+            level = generator.generateLevel(size);
+
+            this.setMap(level);
+        },
+
+        setLevel: function(levelNum) {
+            levelNumber = levelNum;
+            stepsCount = 0;
+            level = levels.getLevel(levelNumber);
+
+            this.setMap(level);
         },
 
         incStepCount: function() {
