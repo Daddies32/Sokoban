@@ -12,7 +12,7 @@ var model = (function() {
         return this.substr(0, index) + character + this.substr(index+character.length);
     }
 
-    var level =[], map = [];
+    var level =[], map = [], solveWay;
     var levelNumber, stepsCount;
 
     var updateLevelInfo = function(levelNum, lvl) {
@@ -53,6 +53,11 @@ var model = (function() {
         setGenLevel: function(size) {
             var genlevel = generator.generateLevel(size);
             updateLevelInfo('Gen', genlevel.level);
+            solveWay = genlevel.solve;
+        },
+
+        getSolveWay: function() {
+            return solveWay;
         },
 
         setLevel: function(levelNum) {

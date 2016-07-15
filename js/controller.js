@@ -1,5 +1,17 @@
 var controller = (function() {
 
+	var solverId;
+
+	var load = function() {
+		view.hideWin();
+
+		if (scoreboard.checkOnline())
+			view.updateScoreBoard();
+		
+		clearInterval(solverId);
+		view.draw();
+	}
+
 	var nextLevel = function(){
 		if (!scoreboard.checkOnline())
 			view.updateScoreBoard();
@@ -65,18 +77,12 @@ var controller = (function() {
 		loadLevel: function(level) {
 			model.setLevel(level);
 			document.getElementById('selectLevel').selectedIndex = level;
-			view.hideWin();
-			if (scoreboard.checkOnline())
-				view.updateScoreBoard();
-			view.draw();
+			load();
 		},
 
 		loadGenLevel: function(size) {
 			model.setGenLevel(size);
-			view.hideWin();
-			if (scoreboard.checkOnline())
-				view.updateScoreBoard();
-			view.draw();
+			load();
 		},
 
 		fillLevelSelector: function(selectId, startBtn) {
@@ -115,11 +121,21 @@ var controller = (function() {
 			};
 		},
 
-		solveLevel: function() {
-			var solveBtn = document.getElementById('solveLevel');
+		setSolveBtn: function(id) {
+			var solveBtn = document.getElementById(id);
 
-			solveBtn.onclick = function() {
+			solveBtn.onclick = function() {	
+				var solveWay = model.getSolveWay();
+				var i = solveWay.length;
 
+				solverId = setInterval(function() {
+					--i;
+					if (i < 0)
+						clearInterval(solverId);
+
+					model.move(solveWay[i].x, solveWay[i].y);
+					view.draw();
+				}, 1);
 			};
 		}
 	}
