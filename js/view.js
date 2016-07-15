@@ -200,23 +200,23 @@ var view = (function() {
 				table.removeChild(table.lastChild);
 			}
 
-			var title = document.createElement('tr');
-
-			var thUser = document.createElement('th');
-			thUser.innerHTML = 'Ник';
-			title.appendChild(thUser);
-
-			var thLvl = document.createElement('th');
-			thLvl.innerHTML = 'Уровень';
-			title.appendChild(thLvl);
-
-			var thSteps = document.createElement('th');
-			thSteps.innerHTML = 'Шагов';
-			title.appendChild(thSteps);
-
-			table.appendChild(title);
-
 			scoreboard.getScoreBoard(function(board) {
+				var title = document.createElement('tr');
+
+				var thUser = document.createElement('th');
+				thUser.innerHTML = 'Ник';
+				title.appendChild(thUser);
+
+				var thLvl = document.createElement('th');
+				thLvl.innerHTML = 'Уровень';
+				title.appendChild(thLvl);
+
+				var thSteps = document.createElement('th');
+				thSteps.innerHTML = 'Шагов';
+				title.appendChild(thSteps);
+
+				table.appendChild(title);
+			
 				for (var i = 0; i < board.length; ++i) {
 					for (var j = 0; j < board[i].scores.length; ++j) {
 						var tr = document.createElement('tr');
