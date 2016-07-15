@@ -7,6 +7,7 @@ var generator =  (function(){
     var charCoords;
     var boxCount;
     var size;
+    var k;
 
     String.prototype.splice = function(start, count, str){
         return this.substring(0, start) + str + this.substring(start + count);
@@ -189,16 +190,27 @@ var generator =  (function(){
                 {x: 1, y: 0},
                 {x: 0, y: 1}
             ];
-            var steps = Math.pow(10, 5);
+
+            var shiftBack = [
+                {x: 1, y: 0},
+                {x: 0, y: 1},
+                {x: -1, y: 0},
+                {x: 0, y: -1}
+            ];
+            var way = [];
+            var steps = Math.pow(10, 4);
             for (var k = 0; k < steps; ++k) {
                 rndInd = (Math.random()*100 >> 0) % (shift.length);
                 this.move(shift[rndInd], size);
+                way.push(shiftBack[rndInd]);
             };
-
             return {
-                map: map,
-                charCoords: this.getCharacterCoords(),
-                boxes: this.getBoxesCoords()
+                level: {
+                    map: map,
+                    charCoords: this.getCharacterCoords(),
+                    boxes: this.getBoxesCoords()
+                },
+                solve: way
             };
         }
     }

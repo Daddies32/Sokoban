@@ -51,7 +51,8 @@ var model = (function() {
         },
 
         setGenLevel: function(size) {
-            updateLevelInfo('Gen', generator.generateLevel(size));
+            var genlevel = generator.generateLevel(size);
+            updateLevelInfo('Gen', genlevel.level);
         },
 
         setLevel: function(levelNum) {
