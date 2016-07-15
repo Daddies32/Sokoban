@@ -2,7 +2,13 @@ var controller = (function() {
 
 	var nextLevel = function(){
 		if (!scoreboard.checkOnline())
-				view.updateScoreBoard();
+			view.updateScoreBoard();
+
+		if (model.getLevelNumber() === 'Gen' || model.getLevelNumber() == +levels.getNumLevels() - 1) {
+			view.showWin();
+			return;
+		}
+
 		controller.loadLevel(+model.getLevelNumber() + 1);
 	};
 
@@ -59,6 +65,7 @@ var controller = (function() {
 		loadLevel: function(level) {
 			model.setLevel(level);
 			document.getElementById('selectLevel').selectedIndex = level;
+			view.hideWin();
 			if (scoreboard.checkOnline())
 				view.updateScoreBoard();
 			view.draw();
@@ -66,6 +73,7 @@ var controller = (function() {
 
 		loadGenLevel: function(size) {
 			model.setGenLevel(size);
+			view.hideWin();
 			if (scoreboard.checkOnline())
 				view.updateScoreBoard();
 			view.draw();

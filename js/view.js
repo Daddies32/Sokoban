@@ -237,6 +237,19 @@ var view = (function() {
 					}
 				}
 			});
+		},
+
+		showWin: function() {
+			var winText = document.getElementById('win_text');
+			winText.style.transition = 'all 1s linear';
+			winText.style.top = '100px';
+		},
+
+		hideWin: function() {
+			var winText = document.getElementById('win_text');
+			winText.style.transition = 'none';
+			winText.style.left = window.innerWidth / 2 - winText.offsetWidth / 2 + 'px';
+			winText.style.top = '-50px';
 		}
 	} 
 
