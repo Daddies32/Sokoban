@@ -113,6 +113,14 @@ var controller = (function() {
 				model.setMap(model.getLevel());
 				view.draw();
 			};
+		},
+
+		solveLevel: function() {
+			var solveBtn = document.getElementById('solveLevel');
+
+			solveBtn.onclick = function() {
+
+			};
 		}
 	}
 
