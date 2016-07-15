@@ -156,6 +156,7 @@ var generator =  (function(){
             initArrUsed(size);
             rndBfs({x: 0, y: 0});
 
+            field = [];
             for (var i = 0; i < size; ++i)
                 field[i] = map[i];
 
