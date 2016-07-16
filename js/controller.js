@@ -8,6 +8,8 @@ var controller = (function() {
 
 		if (scoreboard.checkOnline())
 			view.updateScoreBoard();
+		else
+			view.updateStepsCount();	
 		
 		clearInterval(solverId);
 		view.draw();
