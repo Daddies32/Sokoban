@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sokoban</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+	<script type="text/javascript">
+		var config = {
+			apiKey: "AIzaSyB94OhZhhVtOkdo9JoKQVCboHgnRQbe1bY",
+			authDomain: "sokoban-ea225.firebaseapp.com",
+			databaseURL: "https://sokoban-ea225.firebaseio.com",
+			storageBucket: "",
+		};
+
+		if (typeof firebase !== 'undefined')
+			firebase.initializeApp(config);
+	</script>
+	<script type="text/javascript" src = "js/levels.js"></script>
+	<script type="text/javascript" src = "js/model.js"></script>
+	<script type="text/javascript" src = "js/view.js"></script>
+	<script type="text/javascript" src = "js/controller.js"></script>
+	<script type="text/javascript" src = "js/generator.js"></script>
+	<script type="text/javascript" src = "js/scoreboard.js"></script>
+	<script type="text/javascript" src = "js/sokoban.js"></script>
+</head>
+<body>
+<h1 id = "title" class = "title_shadow">Sokoban</h1>
+<h1 id = "win_text" class = "title_shadow">Победа!</h1>
+<div id = "game">
+	<div class = "left boxshadow">
+		Ник:<br> <input type="text" name="nickname" id = "nickname"><br>
+		Выберите уровень:<br> 
+		<select id = "selectLevel"></select><br>
+		<a href = "#" id = "startBtn" class = "button">Начать</a>
+		<a href = "#" id = "restartBtn" class = "button">Заново</a>
+		<hr class = "afterFloatBtn">
+		Размер уровня:<br>
+		<select id = "sizeLevel">
+			<option value = "7">7</option>
+			<option value = "10">10</option>
+			<option value = "13">13</option>
+			<option value = "16">16</option>
+			<option value = "19">19</option>
+		</select><br>
+		<a href = "#" id = "genLevel" class = "button">Сгенерировать уровень</a>
+		<a href = "#" id = "solveLevel" class = "button">Решить</a>
+	</div>
+
+	<div class = "center">
+		<canvas id = "level"></canvas>
+	</div>
+
+	<div id = "scoreboard" class = "right boxshadow">
+		Кол-во ходов: <label id = "stepsCount"></label><hr>
+		Таблица результатов<br>
+		<div class = "scroll">
+			<table id = "scoreboard_table"></table>
+		</div>
+		<div class = "clear"></div>
+	</div>
+</div>
+</body>
+</html>

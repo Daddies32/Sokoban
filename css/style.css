@@ -1,0 +1,214 @@
+@font-face {
+    font-family: lasco;
+    src: url(../fonts/lasco.ttf);
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: #fff;
+	font-family: lasco;
+}
+
+html, body {
+	background: url('../img/bg.png');
+}
+
+hr { 
+  border : 0;
+  height: 1px; 
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.clear {
+	clear: both;
+}
+
+.title_shadow {
+  text-shadow:0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+}
+
+#title {
+	background: url('../img/wall_bg.png');
+	display: block;
+	text-align: center;
+	color: #fff;
+	padding-bottom: 4px; 
+	margin: 0 0 20px 0;
+}
+
+#game {
+	position: relative;
+}
+
+#game div {
+	position: absolute;
+}
+
+.left {
+	width: 230px;
+	padding: 10px;
+	background: #fff;
+	border-radius: 0 8px 8px 0;
+}
+
+#nickname {
+  padding: 2px;
+  border: 2px solid rgba(255, 255, 255, .5);
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, .25) inset,
+    0 2px 5px rgba(0, 0, 0, .25);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .5);
+  appearance: none;
+  outline: none;
+  font-family: lasco;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.boxshadow {
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.boxshadow:before, .boxshadow:after {
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:50%;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+
+.boxshadow:after {
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+#selectLevel, #sizeLevel {
+	width: 100px;
+}
+
+
+a.button {
+  font-weight: 200;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 3px;
+  background: rgb(64,199,129);
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+  display: block;
+  text-align: center;
+} 
+
+a.button:hover {
+	background: rgb(53, 167, 110);
+}
+
+a.button:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+#startBtn, #restartBtn {
+	text-align: center;
+	width: 80px;
+	margin-top: 10px;
+	float: left;
+}
+
+#restartBtn {
+	margin-left: 5px;
+}
+
+.afterFloatBtn {
+	margin-top: 50px;
+}
+
+#genLevel, #solveLevel {
+	margin-top: 10px;
+	font-size: 15px;
+}
+
+.center {
+	left: 250px;
+	right: 300px;
+}
+
+#win_text {
+  text-align: center;
+  color: #fff;
+  margin: 0 0 20px 0;
+  position: absolute;
+  z-index: 999;
+}
+
+#level {
+	display: block;
+	margin: 0 auto;
+}
+
+.right {
+	width: 280px;
+  height: 500px;
+	padding: 10px;
+	right: 1px;
+	background: #fff;
+	border-radius: 8px 0 0 8px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 15px;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+td {
+  border-right: 1px solid #000;
+}
+
+th:last-child, td:last-child {
+  border-right: 0;
+}
+
+.scroll {
+  overflow-y: scroll;
+  width: 280px;
+  height: 430px;
+  margin: 0 auto;
+  margin-top: 5px;
+}
