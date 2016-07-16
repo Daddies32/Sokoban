@@ -138,15 +138,22 @@ a.button:active {
   box-shadow: 0 3px rgb(33,147,90) inset;
 }
 
+#startBtn, #restartBtn, #back {
+  float: left;
+  margin-top: 10px;
+}
+
 #startBtn, #restartBtn {
-	text-align: center;
 	width: 80px;
-	margin-top: 10px;
-	float: left;
 }
 
 #restartBtn {
 	margin-left: 5px;
+}
+
+#back {
+  width: 200px;
+  margin-bottom: 20px;
 }
 
 .afterFloatBtn {
