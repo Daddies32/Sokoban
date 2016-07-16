@@ -159,7 +159,8 @@ var model = (function() {
                 map[charCoords.y] = map[charCoords.y].replaceAt(charCoords.x, level.map[charCoords.y][charCoords.x]);
             }
 
-            backMoves.push(movedElements);
+            if (movedElements.length > 0)
+                backMoves.push(movedElements);
 
             return movedElements;
         },
