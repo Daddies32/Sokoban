@@ -12,13 +12,14 @@ var model = (function() {
         return this.substr(0, index) + character + this.substr(index+character.length);
     }
 
-    var level =[], map = [], solveWay;
+    var level =[], map = [], backMoves = [], solveWay;
     var levelNumber, stepsCount;
 
     var updateLevelInfo = function(levelNum, lvl) {
         levelNumber = levelNum;
         stepsCount = 0; 
-        level = lvl; 
+        level = lvl;
+        model.freeBackMoves();
         model.setMap(level);
     }
 
@@ -141,27 +142,47 @@ var model = (function() {
                     else
                         map[to.y + shiftY] = map[to.y + shiftY].replaceAt(to.x + shiftX, map[to.y][to.x]);
 
-                    movedElements[0] = this.movedRange(to.x, to.y, to.x + shiftX, to.y + shiftY);
-                    map[to.y] = map[to.y].replaceAt(to.x, '*');
-
-                    movedElements[1] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
+                    movedElements[0] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
                     map[charCoords.y] = map[charCoords.y].replaceAt(charCoords.x,
                         level.map[charCoords.y][charCoords.x]);
+
+                    movedElements[1] = this.movedRange(to.x, to.y, to.x + shiftX, to.y + shiftY);
+                    map[to.y] = map[to.y].replaceAt(to.x, '*');
                 }
 
                 if (map[to.y][to.x] == '@' && level.map[to.y][to.x] == '?')
                     map[to.y] = map[to.y].replaceAt(to.x, '!');
-
-                return movedElements;
+            }
+            else {
+                map[to.y] = map[to.y].replaceAt(to.x, '*');
+                movedElements[0] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
+                map[charCoords.y] = map[charCoords.y].replaceAt(charCoords.x, level.map[charCoords.y][charCoords.x]);
             }
 
-            map[to.y] = map[to.y].replaceAt(to.x, '*');
-            movedElements[0] = this.movedRange(charCoords.x, charCoords.y, to.x, to.y);
-            map[charCoords.y] = map[charCoords.y].replaceAt(charCoords.x, level.map[charCoords.y][charCoords.x]);
+            backMoves.push(movedElements);
 
             return movedElements;
-        }
+        },
 
+        freeBackMoves: function() {
+            backMoves = [];
+        },
+
+        moveBack: function() {
+            if (backMoves.length == 0)
+                return;
+
+            var back = backMoves.pop();
+            for (var i = 0; i < back.length; ++i) {
+                map[back[i].startPos.y] = map[back[i].startPos.y].replaceAt(back[i].startPos.x, map[back[i].finishPos.y][back[i].finishPos.x]);
+                if (map[back[i].finishPos.y][back[i].finishPos.x] == '!' && level.map[back[i].startPos.y][back[i].startPos.x] != '?')
+                    map[back[i].startPos.y] = map[back[i].startPos.y].replaceAt(back[i].startPos.x, '@');
+                else if (map[back[i].finishPos.y][back[i].finishPos.x] == '@' && level.map[back[i].startPos.y][back[i].startPos.x] == '?')
+                    map[back[i].startPos.y] = map[back[i].startPos.y].replaceAt(back[i].startPos.x, '!');  
+                      
+                map[back[i].finishPos.y] = map[back[i].finishPos.y].replaceAt(back[i].finishPos.x, level.map[back[i].finishPos.y][back[i].finishPos.x]);
+            }
+        }
     }
 
 })();

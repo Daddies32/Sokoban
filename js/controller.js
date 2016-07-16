@@ -127,6 +127,7 @@ var controller = (function() {
 
 			btn.onclick = function() {
 				model.setMap(model.getLevel());
+				model.freeBackMoves();
 				view.draw();
 			};
 		},
@@ -146,6 +147,15 @@ var controller = (function() {
 					model.move(solveWay[i].x, solveWay[i].y);
 					view.draw();
 				}, 1);
+			};
+		},
+
+		setMoveBackBtn: function(id) {
+			var backBtn = document.getElementById(id);
+
+			backBtn.onclick = function() {
+				model.moveBack();
+				view.draw();
 			};
 		}
 	}
