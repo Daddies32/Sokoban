@@ -201,6 +201,9 @@ var view = (function() {
 			}
 
 			scoreboard.getScoreBoard(function(board) {
+				if (table.childNodes.length != 0)
+					return;
+				
 				var title = document.createElement('tr');
 
 				var thUser = document.createElement('th');

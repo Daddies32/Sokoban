@@ -178,8 +178,9 @@ a.button:active {
 
 .right {
 	width: 280px;
+  height: 500px;
 	padding: 10px;
-	right: 0px;
+	right: 1px;
 	background: #fff;
 	border-radius: 8px 0 0 8px;
   text-align: center;
@@ -202,4 +203,12 @@ td {
 
 th:last-child, td:last-child {
   border-right: 0;
+}
+
+.scroll {
+  overflow-y: scroll;
+  width: 280px;
+  height: 430px;
+  margin: 0 auto;
+  margin-top: 5px;
 }

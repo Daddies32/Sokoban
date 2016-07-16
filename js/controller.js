@@ -4,6 +4,7 @@ var controller = (function() {
 
 	var load = function() {
 		view.hideWin();
+		controller.setStepsCount(0);
 
 		if (scoreboard.checkOnline())
 			view.updateScoreBoard();
@@ -58,8 +59,10 @@ var controller = (function() {
 
 				press = true;
 
-				if (objectsToMove != undefined && objectsToMove.length > 0) 
+				if (objectsToMove != undefined && objectsToMove.length > 0) { 
 					model.incStepCount();
+					controller.setStepsCount(model.getStepsCount());
+				}
 
 				view.draw(objectsToMove);
 
@@ -100,6 +103,11 @@ var controller = (function() {
 			btn.onclick = function() {
 				controller.loadLevel(select.options[select.selectedIndex].value);
 			};
+		},
+
+		setStepsCount: function(num) {
+			var steps = document.getElementById('stepsCount');
+			steps.innerHTML = num;
 		},
 
 		setGeneratorOptions: function(selectId, buttonId) {
