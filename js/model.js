@@ -58,7 +58,7 @@ var model = (function() {
         },
 
         getSolveWay: function() {
-            return solveWay;
+            return solver.solve(level);
         },
 
         setLevel: function(levelNum) {

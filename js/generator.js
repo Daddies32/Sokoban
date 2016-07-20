@@ -162,7 +162,7 @@ var generator =  (function(){
                 field[i] = map[i];
 
             var stores = [];
-            boxCount = Math.ceil(size / 4) ;
+            boxCount = 2;//Math.ceil(size / 4);
             var k = 0;
             while (k < boxCount) {
                 var x = (Math.random()*100 >> 0) % size; if (x == 1) ++x;

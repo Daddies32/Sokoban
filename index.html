@@ -23,6 +23,7 @@
 	<script type="text/javascript" src = "js/generator.js"></script>
 	<script type="text/javascript" src = "js/scoreboard.js"></script>
 	<script type="text/javascript" src = "js/sokoban.js"></script>
+	<script type="text/javascript" src = "js/solver.js"></script>
 </head>
 <body>
 <h1 id = "title" class = "title_shadow">Sokoban</h1>
@@ -52,14 +53,15 @@
 		<canvas id = "level"></canvas>
 	</div>
 
-	<div id = "scoreboard" class = "right boxshadow">
+	<div class = "right boxshadow">
 		Кол-во ходов: <label id = "stepsCount"></label><hr>
 		Таблица результатов<br>
-		<div class = "scroll">
+		<div id = "scoreboard" class = "scroll">
 			<table id = "scoreboard_table"></table>
 		</div>
 		<div class = "clear"></div>
 	</div>
 </div>
+
 </body>
 </html>
