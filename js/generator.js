@@ -162,7 +162,7 @@ var generator =  (function(){
                 field[i] = map[i];
 
             var stores = [];
-            boxCount = Math.ceil(size / 4) ;
+            boxCount = 2;//Math.ceil(size / 4);
             var k = 0;
             while (k < boxCount) {
                 var x = (Math.random()*100 >> 0) % size; if (x == 1) ++x;
@@ -198,7 +198,7 @@ var generator =  (function(){
                 {x: 0, y: -1}
             ];
             var way = [];
-            var steps = Math.pow(10, 4);
+            var steps = Math.pow(10, 8);
             for (var k = 0; k < steps; ++k) {
                 rndInd = (Math.random()*100 >> 0) % (shift.length);
                 this.move(shift[rndInd], size);

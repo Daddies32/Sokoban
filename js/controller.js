@@ -1,5 +1,10 @@
 var controller = (function() {
-
+	var shiftByOrintation = {
+		l: {x: -1, y: 0},
+		u: {x: 0, y: -1},
+		r: {x: 1, y: 0},
+		d: {x: 0, y: 1}
+	};
 	var solverId;
 
 	var load = function() {
@@ -137,16 +142,17 @@ var controller = (function() {
 
 			solveBtn.onclick = function() {	
 				var solveWay = model.getSolveWay();
-				var i = solveWay.length;
+				var i = -1;
+				console.log(solveWay);
 
 				solverId = setInterval(function() {
-					--i;
-					if (i < 0)
+					++i;
+					if (i > solveWay.length)
 						clearInterval(solverId);
 
-					model.move(solveWay[i].x, solveWay[i].y);
+					model.move(shiftByOrintation[solveWay[i]].x, shiftByOrintation[solveWay[i]].y);
 					view.draw();
-				}, 1);
+				}, 100);
 			};
 		},
 
