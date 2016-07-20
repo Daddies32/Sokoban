@@ -198,7 +198,7 @@ var generator =  (function(){
                 {x: 0, y: -1}
             ];
             var way = [];
-            var steps = Math.pow(10, 8);
+            var steps = Math.pow(10, 4);
             for (var k = 0; k < steps; ++k) {
                 rndInd = (Math.random()*100 >> 0) % (shift.length);
                 this.move(shift[rndInd], size);
